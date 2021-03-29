@@ -3,7 +3,6 @@ var foodS,foodStock;
 var fedTime,lastFed,currentTime;
 var feed,addFood;
 var foodObj;
-var gameState,readState;
 
 function preload(){
 sadDog=loadImage("Images/Dog.png");
@@ -33,19 +32,22 @@ function setup() {
   addFood=createButton("Add Food");
   addFood.position(800,95);
   addFood.mousePressed(addFoods);
+  
+  foodStock.on("value",function(data){
+    foodS = data.val();
+    foodObj.updateFoodStock(foodS);
+})
 }
 
 function draw() {
   foodObj.display();
   drawSprites();
   fedTime = database.ref("fedtime");
-  fedTime.on("value",(data)=>{
-    lastFed = data.val})
-  fill(255,255,254);
+ 
   textSize(15);
   if(lastFed>=12)
   {
-  text("lastFed : "+lastFed%12+"TM" , 350 , 30);
+  text("lastFed : "+lastFed%12+"PM" , 50 , 100);
   }
   else
   if(lastFed === 0)
@@ -53,7 +55,7 @@ function draw() {
   text("lastFed : "+lastFed%12+"AM" , 350 , 30);
   }
 }
-
+text("lastFed : " +lastFed+ "AM" , 50 , 100);
 
 //function to update food stock and last fed time
 function feedDog(){
