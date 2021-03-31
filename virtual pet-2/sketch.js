@@ -32,7 +32,7 @@ function setup() {
   addFood=createButton("Add Food");
   addFood.position(800,95);
   addFood.mousePressed(addFoods);
-  
+  foodStock=database.ref('Food')
   foodStock.on("value",function(data){
     foodS = data.val();
     foodObj.updateFoodStock(foodS);
@@ -42,7 +42,7 @@ function setup() {
 function draw() {
   foodObj.display();
   drawSprites();
-  fedTime = database.ref("fedtime");
+  fill("white");
  
   textSize(15);
   if(lastFed>=12)
@@ -52,10 +52,9 @@ function draw() {
   else
   if(lastFed === 0)
   {
-  text("lastFed : "+lastFed%12+"AM" , 350 , 30);
+  text("lastFed : " +lastFed+ "AM" , 50 , 100);
   }
 }
-text("lastFed : " +lastFed+ "AM" , 50 , 100);
 
 //function to update food stock and last fed time
 function feedDog(){
